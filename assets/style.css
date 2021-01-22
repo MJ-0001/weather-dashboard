@@ -29,3 +29,12 @@ body {
 .searches {
   border-bottom: black solid 2px;
 }
+
+.div-bord {
+  border: black solid 2px;
+}
+
+.five-day {
+  float: left;
+  margin-right: 30px;
+}
