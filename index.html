@@ -16,109 +16,87 @@
    <script src="./scripts/app.js" async></script>
   <title>Document</title>
 </head>
-<body>
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Weather Dashboard</h1>
-    </div>
-  </div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-4 searches">
-        <form class="pt-2 pb-2 mb-3">
-          <input type="text" class="search form-control border border-info" placeholder="Search...">
-        </form>
-
-        <table class="table table-dark">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Previous searches</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row"></th>
-              <td>Birmingham</td>
-            </tr>
-            <tr>
-              <th scope="row"></th>
-              <td>London</td>
-            </tr>
-            <tr>
-              <th scope="row"></th>
-              <td>Madrid</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="col-sm-8 dashboard">
-        <!-- API div goes here -->
-        <div class="current mt-2">
-          <h3 class="city">Current Weather:</h3>
-          <p class="temp">Temperature:</p>
-          <p class="humid">Humidity:</p>
-          <p class="wind">Wind Speed:</p>
-          <p class="uv">UV Index:</p>
-        </div>
-
-        <div class="mt-5">
-          <h3 id="future">5-Day Weather Forecast:</h3>
-          <div class="five-day mb-3" id=day1>
-            <h5 id="date1"></h5>
-            <p id="day-one-temp"></p>
-            <p id="day-one-humid"></p>
-            <p id="day-one-wind"></p>
-            <p id="day-one-uv"></p>
-          </div>
-
-          <div class="five-day mb-3" id=day1>
-            <h5 id="date2"></h5>
-            <p id="day-two-temp"></p>
-            <p id="day-two-humid"></p>
-            <p id="day-two-wind"></p>
-            <p id="day-two-uv"></p>
-          </div>
-
-          <div class="five-day mb-3" id=day1>
-            <h5 id="date3"></h5>
-            <p id="day-three-temp"></p>
-            <p id="day-three-humid"></p>
-            <p id="day-three-wind"></p>
-            <p id="day-three-uv"></p>
-          </div>
-
-          <div class="five-day mb-3" id=day1>
-            <h5 id="date4"></h5>
-            <p id="day-four-temp"></p>
-            <p id="day-four-humid"></p>
-            <p id="day-four-wind"></p>
-            <p id="day-four-uv"></p>
-          </div>
-
-          <div class="five-day mb-3" id=day1>
-            <h5 id="date5"></h5>
-            <p id="day-five-temp"></p>
-            <p id="day-five-humid"></p>
-            <p id="day-five-wind"></p>
-            <p id="day-five-uv"></p>
-          </div>
-
-          
-
-
-
-
-
-
-        
-        </div>
-
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Weather Dashboard</h1>
       </div>
     </div>
-  </div>
 
-</body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 searches">
+          <form class="pt-2 pb-2 mb-3">
+            <input type="text" class="search form-control border border-info" placeholder="Search...">
+          </form>
+
+          <table class="table table-dark text-left">
+            <thead>
+              <tr>
+                <th scope="col">Previous searches</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week col-sm-8 dashboard">
+          <!-- API div goes here -->
+          <div class="current mt-2">
+            <h3 class="city">Current Weather:</h3>
+            <h5 id="date0"></h5>
+            <p class="temp">Temperature:</p>
+            <p class="humid">Humidity:</p>
+            <p class="wind">Wind Speed:</p>
+            <p class="uv">UV Index:</p>
+          </div>
+
+          <div class="mt-5">
+            <h3 class="city">5-Day Weather Forecast:</h3>
+            <div class="box mb-3" id=day1>
+              <h5 id="date1"></h5>
+              <p id="day-one-temp"></p>
+              <p id="day-one-humid"></p>
+              <p id="day-one-wind"></p>
+              <p id="day-one-uv"></p>
+            </div>
+
+            <div class="box mb-3" id=day1>
+              <h5 id="date2"></h5>
+              <p id="day-two-temp"></p>
+              <p id="day-two-humid"></p>
+              <p id="day-two-wind"></p>
+              <p id="day-two-uv"></p>
+            </div>
+
+            <div class="box mb-3" id=day1>
+              <h5 id="date3"></h5>
+              <p id="day-three-temp"></p>
+              <p id="day-three-humid"></p>
+              <p id="day-three-wind"></p>
+              <p id="day-three-uv"></p>
+            </div>
+
+            <div class="box mb-3" id=day1>
+              <h5 id="date4"></h5>
+              <p id="day-four-temp"></p>
+              <p id="day-four-humid"></p>
+              <p id="day-four-wind"></p>
+              <p id="day-four-uv"></p>
+            </div>
+
+            <div class="box mb-3" id=day1>
+              <h5 id="date5"></h5>
+              <p id="day-five-temp"></p>
+              <p id="day-five-humid"></p>
+              <p id="day-five-wind"></p>
+              <p id="day-five-uv"></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

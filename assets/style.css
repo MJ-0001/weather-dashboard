@@ -14,8 +14,8 @@ body {
   'Open Sans', 'Helvetica Neue', sans-serif;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-top: solid 3px black;
-  border-bottom: solid 3px black;
+  border-top: black solid 3px;
+  border-bottom: black solid 3px;
   color: black;
   font: bolder;
   margin-bottom: 0px;
@@ -26,15 +26,22 @@ body {
   border-left: black solid 2px;
 }
 
-.searches {
-  border-bottom: black solid 2px;
-}
-
 .div-bord {
   border: black solid 2px;
 }
 
-.five-day {
+.box {
   float: left;
   margin-right: 30px;
+  border: black solid 2px;
+  padding: 5px;
+  background-color: steelblue;
+}
+
+.current {
+  border: black solid 2px;
+  padding: 5px;
+  background-color: #343a40;
+  color: white;
+  width: 49%;
 }
