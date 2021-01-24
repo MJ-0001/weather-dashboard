@@ -36,6 +36,7 @@ body {
   border: black solid 2px;
   padding: 5px;
   background-color: steelblue;
+  width: 20%;
 }
 
 .current {
