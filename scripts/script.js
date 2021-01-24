@@ -35,6 +35,7 @@ $("input").keypress(function (e) {
   }  
 })
 
+// Function to create API url
 function buildURL() {
   let city = searchArray[0];
   let url = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + apiKey;
