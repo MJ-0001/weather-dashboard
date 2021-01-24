@@ -1,4 +1,3 @@
-// When browser loads fetch API data
 $(function getWeather() {
   $.ajax({
     url: "http://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=bd0d5575197bb4b38c8ddc0ae3cb7389",
@@ -106,4 +105,3 @@ $(function getCityStorage() {
     prependCity(lastItem[i])
   }
 })
-
