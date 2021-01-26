@@ -1,5 +1,4 @@
 // Retrieve previous searches from local storage
-
 $(function getCityStorage() {
   let lastItem = JSON.parse(localStorage.getItem("city"));
     function prependCity(append) {
@@ -10,7 +9,9 @@ $(function getCityStorage() {
   }
 })
 
+// API key for url
 let apiKey = "bd0d5575197bb4b38c8ddc0ae3cb7389";
+// Array to store search items
 let searchArray = [];
 
 function userSearch() {
@@ -18,6 +19,7 @@ function userSearch() {
   return search
 }
 
+// Function to store search item and push it to an array
 $("input").keypress(function (e) { 
   let item = userSearch()
     function appendCity(append) {
@@ -42,10 +44,12 @@ function buildURL() {
   return url;
 }
 
+// Main function makes two API calls using AJAX to retrieve data
 function getWeather() {
   let newURL = buildURL();
   console.log(newURL)
 
+  // First API call used to grab location coordinates
   $(function callAPI() {
     let oneCallAPI = [];
     $.ajax({
@@ -60,13 +64,15 @@ function getWeather() {
 
       let secondURL = oneCallAPI[0];
 
+      // Second API call adds in the location to the onecall API and pulls down the weathe data
       $.ajax({
         url: secondURL,
         method: "GET"
       }).then(function(response) {
         console.log(secondURL)
         let dateArray = [];
-  
+        
+        // Moment JS used to convert UNIX timestamp to standard date
         $(function getDate() {
           for (let i = 0; i < response.daily.length; i++) {
             let date = response.daily[i].dt;
@@ -74,7 +80,8 @@ function getWeather() {
             dateArray.push(dateString);
           }
         })
-  
+
+        // Functions to append weather data to HTML divs
         $(function currentDayForecast() {
           $("#date0").append(" " + dateArray[0]);
           $(".city").append(" " + response.timezone);
