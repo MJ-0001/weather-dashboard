@@ -1,11 +1,10 @@
 // Retrieve previous searches from local storage
-$(function getCityStorage() {
-  let lastItem = JSON.parse(localStorage.getItem("city"));
-    function prependCity(append) {
-      $("tbody").prepend("<tr>" + "<td class='append-left'>" + append + "</td>" + "</tr>")
+$(function getStorage() {
+  if (localStorage.getItem("city") != null) {
+    let city = JSON.parse(localStorage.getItem("city"));
+    for (let i = 0; i < city.length; i++) {
+      $("tbody").append("<tr>" + "<td class='append-left'>" + city[i] + "</td>" + "</tr>");
     }
-  for (let i = 0; i < lastItem.length; i++) {
-    prependCity(lastItem[i])
   }
 })
 
@@ -14,26 +13,65 @@ let apiKey = "bd0d5575197bb4b38c8ddc0ae3cb7389";
 // Array to store search items
 let searchArray = [];
 
+// Capitalise the first letter of each city
+function toCapitals(string) {
+  string = string.split(" ");
+    for (var i = 0; i < string.length; i++) {
+      string[i] = string[i][0].toUpperCase() + string[i].substr(1);
+    }
+  return string.join(" ");
+}
+
+// Retrieve user's search
 function userSearch() {
-  let search = $("input").val().trim().toLowerCase();
+  let city = $("input").val().trim().toLowerCase();
+  let search = toCapitals(city);
   return search
+}
+
+// Clear past searches and local storage
+$("#clear").click(function (e) { 
+  e.preventDefault();
+  $("#main").empty();
+  $("#weather").removeClass("dashboard");
+  $(".city-table").empty();
+  localStorage.clear();
+});
+
+// Append last search to previous searches table
+function appendCity(item) {
+  $(".city-table").append("<tr>" + "<td class='append-left'>" + item + "</td>" + "</tr>");
+} 
+
+// Set local storage with latest search
+function setStorage() {
+  let newSearch = $("input").val();
+    if (localStorage.getItem("city") == null) {
+      localStorage.setItem("city", "[]");
+    }
+  let oldSearch = JSON.parse(localStorage.getItem("city"));
+  oldSearch.push(newSearch);
+  localStorage.setItem("city", JSON.stringify(oldSearch));
 }
 
 // Function to store search item and push it to an array
 $("input").keypress(function (e) { 
   let item = userSearch()
-    function appendCity(append) {
-      $(".city-table").append("<tr>" + "<td class='append-left'>" + append + "</td>" + "</tr>");
-    }  
   if (e.which == 13) {
     e.preventDefault();
-      if (item != " ") {
-        searchArray.unshift(item);  
-        localStorage.setItem("city", JSON.stringify(searchArray));
-        appendCity(searchArray[0]);
-        $("input").val(" ");
-        getWeather();
-      }
+    $(".data").text("");
+    if (item !== searchArray[0]) {
+      searchArray.unshift(item);  
+      setStorage();
+      appendCity(item);
+      // appendCity(searchArray[0]);
+      $("input").val("");
+      getWeather();
+    }
+    else if (item === searchArray[0]) {
+      alert("Weather data for this city is already populated");
+      $("input").val("");
+    }
   }  
 })
 
@@ -69,71 +107,70 @@ function getWeather() {
         url: secondURL,
         method: "GET"
       }).then(function(response) {
-        console.log(secondURL)
         let dateArray = [];
-        
+                        
         // Moment JS used to convert UNIX timestamp to standard date
-        $(function getDate() {
-          for (let i = 0; i < response.daily.length; i++) {
+        function getDate() {
+          for (var i = 0; i < response.daily.length; i++) {
             let date = response.daily[i].dt;
             let dateString = moment.unix(date).format("DD-MM-YYYY");
             dateArray.push(dateString);
           }
-        })
+        }
+        getDate();
 
-        // Functions to append weather data to HTML divs
-        $(function currentDayForecast() {
-          $("#date0").append(" " + dateArray[0]);
-          $(".city").append(" " + response.timezone);
-          $(".temp").append(" " + response.current.temp + "°C");
-          $(".humid").append(" " + response.current.humidity + "%");
-          $(".wind").append(" " + response.current.wind_speed + " MPH");
-          $(".uv").append(" " + response.current.uvi);
-        })
-        
-        $(function oneDayForecast() {
-          $("#date1").append(" " + dateArray[1]);
-          $("#day-one-temp").append(" " + response.daily[1].temp.day + "°C");
-          $("#day-one-humid").append(" " + response.daily[1].humidity + "%");
-          $("#day-one-wind").append(" " + response.daily[1].wind_speed + " MPH");
-          $("#day-one-uv").append(" " + response.daily[1].uvi);
-        })
-  
-        $(function twoDayForecast() {
-          $("#date2").append(" " + dateArray[2]);
-          $("#day-two-temp").append(" " + response.daily[2].temp.day + "°C");
-          $("#day-two-humid").append(" " + response.daily[2].humidity + "%");
-          $("#day-two-wind").append(" " + response.daily[2].wind_speed + " MPH");
-          $("#day-two-uv").append(" " + response.daily[2].uvi);
-        })
-  
-        $(function threeDayForecast() {
-          $("#date3").append(" " + dateArray[3]);
-          $("#day-three-temp").append(" " + response.daily[3].temp.day + "°C");
-          $("#day-three-humid").append(" " + response.daily[3].humidity + "%");
-          $("#day-three-wind").append(" " + response.daily[3].wind_speed + " MPH");
-          $("#day-three-uv").append(" " + response.daily[3].uvi);
-        })
-  
-        $(function fourDayForecast() {
-          $("#date4").append(" " + dateArray[4]);
-          $("#day-four-temp").append(" " + response.daily[4].temp.day + "°C");
-          $("#day-four-humid").append(" " + response.daily[4].humidity + "%");
-          $("#day-four-wind").append(" " + response.daily[4].wind_speed + " MPH");
-          $("#day-four-uv").append(" " + response.daily[4].uvi);
-        })
-  
-        $(function fiveDayForecast() {
-          $("#date5").append(" " + dateArray[5]);
-          $("#day-five-temp").append(" " + response.daily[5].temp.day + "°C");
-          $("#day-five-humid").append(" " + response.daily[5].humidity + "%");
-          $("#day-five-wind").append(" " + response.daily[5].wind_speed + " MPH");
-          $("#day-five-uv").append(" " + response.daily[5].uvi);
-        })
+        // variables for current weather
+        let date = dateArray[0];
+        let timezone = response.timezone;
+        let temp = response.current.temp + "°C";
+        let humid = response.current.humidity + "%";
+        let wind = response.current.wind_speed + "MPH";
+        let uv = response.current.uvi;
+
+        // append dynamic html and data to container
+        $("#main").html("");
+        $("#weather").addClass("dashboard");
+        $("#main").append('<div class="current">' + '<h3>Current Weather: ' + 
+        timezone + '</h3>' + '<h5>Date: ' + date + '</h5>' + 
+        '<p>Temperature: ' + temp + '</p>' +  '<p>Humidity: ' + 
+        humid + '</p>' + '<p>Wind Speed: ' + wind + '</p>' + 
+        '<p>UV Index: ' + uv + '</p>' + '</div>');
+
+        var dayArray = [];
+
+        class Weather {
+          constructor(date, temp, humidity, wind, uv) {
+            this.date = date;
+            this.temp = temp;
+            this.humidity = humidity;
+            this.wind = wind;
+            this.uv = uv;
+          }
+        }
+
+        function fiveDay() {
+          for (var i = 0; i < response.daily.length; i++) {
+            var day = new Weather(
+              dateArray[i], 
+              response.daily[i].temp.day,
+              response.daily[i].humidity,
+              response.daily[i].wind_speed,
+              response.daily[i].uvi
+              );
+              dayArray.push(day);
+          }
+        }
+        fiveDay();
+
+        for (var i = 1; i < 6; i++) {
+          $("#main").append('<div class="box">' + '<h5>Date: ' + dayArray[i].date + '</h5>' + 
+          '<p>Temperature: ' + dayArray[i].temp + '</p>' +  '<p>Humidity: ' + 
+          dayArray[i].humidity + '</p>' + '<p>Wind Speed: ' + dayArray[i].wind + '</p>' + 
+          '<p>UV Index: ' + dayArray[i].uv + '</p>' + '</div>');
+        }
       })
     })
   })
 }
-
 
 
