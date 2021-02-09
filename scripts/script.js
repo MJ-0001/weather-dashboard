@@ -8,8 +8,6 @@ $(function getStorage() {
   }
 })
 
-// API key for url
-let apiKey = "bd0d5575197bb4b38c8ddc0ae3cb7389";
 // Array to store search items
 let searchArray = [];
 
@@ -26,7 +24,7 @@ function toCapitals(string) {
 function userSearch() {
   let city = $("input").val().trim().toLowerCase();
   let search = toCapitals(city);
-  return search
+  return search;
 }
 
 // Clear past searches and local storage
@@ -56,7 +54,7 @@ function setStorage() {
 
 // Function to store search item and push it to an array
 $("input").keypress(function (e) { 
-  let item = userSearch()
+  let item = userSearch();
   if (e.which == 13) {
     e.preventDefault();
     $(".data").text("");
@@ -78,14 +76,14 @@ $("input").keypress(function (e) {
 // Function to create API url
 function buildURL() {
   let city = searchArray[0];
-  let url = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + apiKey;
+  let url = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=bd0d5575197bb4b38c8ddc0ae3cb7389";
   return url;
 }
 
 // Main function makes two API calls using AJAX to retrieve data
 function getWeather() {
   let newURL = buildURL();
-  console.log(newURL)
+  console.log(newURL);
 
   // First API call used to grab location coordinates
   $(function callAPI() {
@@ -97,7 +95,7 @@ function getWeather() {
       let lat = response.city.coord.lat;
       let lon = response.city.coord.lon;
       let oneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + 
-      "&lon=" + lon + "&exclude=minutely,hourly,alerts&units=metric&appid=" + apiKey;
+      "&lon=" + lon + "&exclude=minutely,hourly,alerts&units=metric&appid=bd0d5575197bb4b38c8ddc0ae3cb7389";
       oneCallAPI.push(oneCallURL);
 
       let secondURL = oneCallAPI[0];
@@ -146,7 +144,7 @@ function getWeather() {
             this.wind = wind;
             this.uv = uv;
           }
-        }
+        };
 
         function fiveDay() {
           for (var i = 0; i < response.daily.length; i++) {
