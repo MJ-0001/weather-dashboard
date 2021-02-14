@@ -1,6 +1,6 @@
 // Retrieve previous searches from local storage
 $(function getStorage() {
-  if (localStorage.getItem("city") != null) {
+  if (localStorage.length !== 0) {
     let city = JSON.parse(localStorage.getItem("city"));
     for (let i = 0; i < city.length; i++) {
       $("tbody").append("<tr>" + "<td class='append-left'>" + city[i] + "</td>" + "</tr>");
