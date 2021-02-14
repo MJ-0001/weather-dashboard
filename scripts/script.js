@@ -12,18 +12,18 @@ $(function getStorage() {
 let searchArray = [];
 
 // Capitalise the first letter of each city
-function toCapitals(string) {
-  string = string.split(" ");
-    for (var i = 0; i < string.length; i++) {
-      string[i] = string[i][0].toUpperCase() + string[i].substr(1);
-    }
-  return string.join(" ");
-}
+// function toCapitals(string) {
+//   string = string.split(" ");
+//     for (var i = 0; i < string.length; i++) {
+//       string[i] = string[i][0].toUpperCase() + string[i].substr(1);
+//     }
+//   return string.join(" ");
+// }
 
 // Retrieve user's search
 function userSearch() {
-  let city = $("input").val().trim().toLowerCase();
-  let search = toCapitals(city);
+  let search = $("input").val().trim().toLowerCase();
+  // let search = toCapitals(city);
   return search;
 }
 
