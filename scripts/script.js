@@ -1,6 +1,6 @@
 // Retrieve previous searches from local storage
 $(function getStorage() {
-  if (localStorage.length !== 0) {
+  if (localStorage.getItem("city") != null) {
     let city = JSON.parse(localStorage.getItem("city"));
     for (let i = 0; i < city.length; i++) {
       $("tbody").append("<tr>" + "<td class='append-left'>" + city[i] + "</td>" + "</tr>");
@@ -12,18 +12,16 @@ $(function getStorage() {
 let searchArray = [];
 
 // Capitalise the first letter of each city
-// function toCapitals(string) {
-//   string = string.split(" ");
-//     for (var i = 0; i < string.length; i++) {
-//       string[i] = string[i][0].toUpperCase() + string[i].substr(1);
-//     }
-//   return string.join(" ");
-// }
+function toCapitals(string) {
+  newString = string.toUpperCase();
+  console.log(newString);
+  return newString; 
+}
 
 // Retrieve user's search
 function userSearch() {
-  let search = $("input").val().trim().toLowerCase();
-  // let search = toCapitals(city);
+  let city = $("input").val().trim().toLowerCase();
+  let search = toCapitals(city);
   return search;
 }
 
