@@ -14,7 +14,6 @@ let searchArray = [];
 // Capitalise the first letter of each city
 function toCapitals(string) {
   newString = string.toUpperCase();
-  console.log(newString);
   return newString; 
 }
 
@@ -60,7 +59,6 @@ $("input").keypress(function (e) {
       searchArray.unshift(item);  
       setStorage();
       appendCity(item);
-      // appendCity(searchArray[0]);
       $("input").val("");
       getWeather();
     }
@@ -81,7 +79,6 @@ function buildURL() {
 // Main function makes two API calls using AJAX to retrieve data
 function getWeather() {
   let newURL = buildURL();
-  console.log(newURL);
 
   // First API call used to grab location coordinates
   $(function callAPI() {
